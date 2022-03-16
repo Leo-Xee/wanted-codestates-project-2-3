@@ -1,8 +1,8 @@
 import { ChangeEvent, MouseEvent } from "react";
 
-type ToggleFunc = () => void;
-type InputChangeFunc = (e: ChangeEvent<HTMLInputElement>) => void;
-type ClickUlEventFunc = (e: MouseEvent<HTMLUListElement>) => void;
+export type ToggleFunc = () => void;
+export type InputChangeFunc = (e: ChangeEvent<HTMLInputElement>) => void;
+export type ClickUlEventFunc = (e: MouseEvent<HTMLUListElement>) => void;
 
 export type UseToggleBtns = [
   ToggleFunc,
