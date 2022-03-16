@@ -40,7 +40,7 @@ export const emojiMenus: EmojiMenu[] = [
     id: 8,
     topId: 4,
     code: "PARSER",
-    name: "원본 로그 파서 원본 로그 파서 원본 로그 파서 원본 로그 파서",
+    name: "원본 로그 파서",
     nameEn: "Parser",
     nameKo: "원본 로그 파서",
     route: "/parser",
