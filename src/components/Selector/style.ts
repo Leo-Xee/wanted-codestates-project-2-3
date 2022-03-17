@@ -40,7 +40,10 @@ export const ItemContainer = styled.div`
   }
 `;
 
-export const Item = styled.div`
+export const Item = styled.div<{ active: boolean }>`
+  overflow: hidden;
+  padding: 15px;
+  padding-left: 20px;
   overflow: hidden;
   padding: 15px 0 15px 20px;
   font-size: 1.6rem;
@@ -50,6 +53,9 @@ export const Item = styled.div`
   & + & {
     border-top: 1px solid rgb(0 0 0 / 10%);
   }
+
+  background: ${({ active }) => active && "CornflowerBlue"};
+  color: ${({ active }) => active && "white"}; ;
 `;
 
 export const Footer = styled.div`

@@ -7,6 +7,7 @@ export const MenuButton = styled.button`
   font-size: 2rem;
   background: white;
   border-radius: 10px;
+  padding: 20px;
   box-shadow: 0 0 10px rgb(0 0 0 / 20%);
 `;
 
