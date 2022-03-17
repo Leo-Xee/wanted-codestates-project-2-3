@@ -12,19 +12,19 @@ import {
 interface Props {
   nowSelected: EmojiMenu[];
   setNowSelected: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
-  selected: EmojiMenu[];
-  setSelected: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
-  avaliable: EmojiMenu[];
-  setAvaliable: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
+  selectedData: EmojiMenu[];
+  setSelectedData: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
+  avaliableData: EmojiMenu[];
+  setAvaliableData: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
 }
 
 function ControlButtons({
   nowSelected,
   setNowSelected,
-  selected,
-  setSelected,
-  avaliable,
-  setAvaliable,
+  selectedData,
+  setSelectedData,
+  avaliableData,
+  setAvaliableData,
 }: Props) {
   const filteredItems = (arr: EmojiMenu[]) => {
     const nowSelectedIndex = nowSelected.map((item) => item.id);
@@ -35,28 +35,28 @@ function ControlButtons({
   const moveMoment = (type: string) => {
     switch (type) {
       case "reset":
-        setAvaliable(emojiMenus);
-        setSelected([]);
+        setAvaliableData(emojiMenus);
+        setSelectedData([]);
         console.log("RESET");
         return;
       case "SToA_all":
-        setAvaliable(emojiMenus);
-        setSelected([]);
+        setAvaliableData(emojiMenus);
+        setSelectedData([]);
         console.log("SELECT TO AVAILABLE ALL");
         return;
       case "AToS_all":
-        setAvaliable([]);
-        setSelected(emojiMenus);
+        setAvaliableData([]);
+        setSelectedData(emojiMenus);
         console.log("AVAILABLE TO SELECT ALL");
         return;
       case "SToA_selected":
-        setAvaliable([...avaliable, ...nowSelected]);
-        setSelected(filteredItems(selected));
+        setAvaliableData([...avaliableData, ...nowSelected]);
+        setSelectedData(filteredItems(selectedData));
         console.log("AVAILABLE TO SELECT SELECTED ITEM");
         return;
       case "AToS_selected":
-        setAvaliable(filteredItems(avaliable));
-        setSelected([...selected, ...nowSelected]);
+        setAvaliableData(filteredItems(avaliableData));
+        setSelectedData([...selectedData, ...nowSelected]);
         console.log("AVAILABLE TO SELECT SELECTED ITEM");
         return;
       default:
