@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Li, Ul } from "../style";
+import { Input, Li, Ul } from "../../style";
 import { Props } from "./types";
 
 const SetItemSize = ({ settingState, handleUlClick }: Props) => {

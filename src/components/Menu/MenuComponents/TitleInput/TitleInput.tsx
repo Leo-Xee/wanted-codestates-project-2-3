@@ -1,5 +1,5 @@
 import React from "react";
-import { InpDiv, Input } from "../style";
+import { InpDiv, Input } from "../../style";
 import { Props } from "./types";
 
 const TitleInput = ({
