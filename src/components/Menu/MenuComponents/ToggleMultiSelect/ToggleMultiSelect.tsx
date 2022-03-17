@@ -8,7 +8,7 @@ const ToggleMultiSelect = ({ settingState, handleToggleMultiSelect }: Props) => 
   return (
     <ToggleDiv>
       <span>하나씩만 옮기기</span>
-      <span onClick={handleToggleMultiSelect}>{multiSelect ? "🟢 " : "🔴"} </span>
+      <span onClick={handleToggleMultiSelect}>{multiSelect ? "🔴" : "🟢"} </span>
     </ToggleDiv>
   );
 };

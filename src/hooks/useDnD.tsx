@@ -13,9 +13,9 @@ function useDnD(
   const checkMoveUpAndDown = (): string => {
     if (startClientY.current && enterClientY.current) {
       if (startClientY.current > enterClientY.current) {
-        return "move_up";
+        return "move-up";
       } else if (startClientY.current < enterClientY.current) {
-        return "move_down";
+        return "move-down";
       }
     }
     return "";
@@ -38,8 +38,8 @@ function useDnD(
   const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
 
-    target.classList.remove("move_up");
-    target.classList.remove("move_down");
+    target.classList.remove("move-up");
+    target.classList.remove("move-down");
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -48,8 +48,8 @@ function useDnD(
     const targetId = Number(target.id);
 
     if (lastLeaveTarget.current) {
-      lastLeaveTarget.current.classList.remove("move_up");
-      lastLeaveTarget.current.classList.remove("move_down");
+      lastLeaveTarget.current.classList.remove("move-up");
+      lastLeaveTarget.current.classList.remove("move-down");
     }
     changeDataOrder(draggedId, targetId);
   };

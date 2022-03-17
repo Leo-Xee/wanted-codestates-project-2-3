@@ -16,6 +16,7 @@ interface Props {
   setSelectedData: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
   avaliableData: EmojiMenu[];
   setAvaliableData: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
+  activeSelector: number;
 }
 
 function ControlButtons({
@@ -37,27 +38,22 @@ function ControlButtons({
       case "reset":
         setAvaliableData(emojiMenus);
         setSelectedData([]);
-        console.log("RESET");
         return;
       case "SToA_all":
         setAvaliableData(emojiMenus);
         setSelectedData([]);
-        console.log("SELECT TO AVAILABLE ALL");
         return;
       case "AToS_all":
         setAvaliableData([]);
         setSelectedData(emojiMenus);
-        console.log("AVAILABLE TO SELECT ALL");
         return;
       case "SToA_selected":
         setAvaliableData([...avaliableData, ...nowSelected]);
         setSelectedData(filteredItems(selectedData));
-        console.log("AVAILABLE TO SELECT SELECTED ITEM");
         return;
       case "AToS_selected":
         setAvaliableData(filteredItems(avaliableData));
         setSelectedData([...selectedData, ...nowSelected]);
-        console.log("AVAILABLE TO SELECT SELECTED ITEM");
         return;
       default:
         alert("유효하지 않은 작업입니다.");
@@ -65,11 +61,11 @@ function ControlButtons({
   };
 
   const buttons = [
-    { component: <BiRefresh />, moveKey: "reset" },
-    { component: <BiChevronLeft />, moveKey: "SToA_selected" },
-    { component: <BiChevronRight />, moveKey: "AToS_selected" },
-    { component: <BiChevronsLeft />, moveKey: "SToA_all" },
-    { component: <BiChevronsRight />, moveKey: "AToS_all" },
+    { component: <BiRefresh />, moveKey: "reset", active: false },
+    { component: <BiChevronLeft />, moveKey: "SToA_selected", active: selectedData.length === 0 },
+    { component: <BiChevronRight />, moveKey: "AToS_selected", active: avaliableData.length === 0 },
+    { component: <BiChevronsLeft />, moveKey: "SToA_all", active: false },
+    { component: <BiChevronsRight />, moveKey: "AToS_all", active: false },
   ];
   return (
     <S.ButtonsContainer>
@@ -81,6 +77,7 @@ function ControlButtons({
               moveMoment(btn.moveKey);
               setNowSelected([]);
             }}
+            disabled={btn.active}
           >
             {btn.component}
           </S.IconButton>

@@ -3,22 +3,52 @@ import React, { useState, useEffect } from "react";
 import { EmojiMenu } from "../../data/emojiMenus";
 import useDnD from "../../hooks/useDnD";
 import * as S from "./style";
+import { Setting } from "../../components/Menu/settingReducer/types";
 
 type SelectorProps = {
   data: EmojiMenu[];
   setData: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
   nowSelected: EmojiMenu[];
   setNowSelected: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
+  active: boolean;
+  keyWord: string;
+  settingState: Setting;
+  isAvailableSelector?: boolean;
 };
 
-function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps) {
+function Selector({
+  data,
+  setData,
+  nowSelected,
+  setNowSelected,
+  active,
+  keyWord,
+  settingState,
+  isAvailableSelector,
+}: SelectorProps) {
   const [handleDragStart, handleDragEnter, handleDragLeave, handleDrop] = useDnD(data, setData);
   const [lastIndex, setLastIndex] = useState<number>(0);
 
   const [shift, setShift] = useState(false);
   const [ctrl, setCtrl] = useState(false);
+  const {
+    showTitle,
+    availableTitle,
+    selectedTitle,
+    showSelectedItem,
+    itemSize,
+    width,
+    height,
+    multiSelect,
+  } = settingState;
+
+  const filter = () => {
+    return data.filter((item) => item.name.includes(keyWord));
+  };
 
   useEffect(() => {
+    if (!active) setNowSelected([]);
+
     document.addEventListener("keydown", (e) => {
       if (e.shiftKey) {
         setShift(true);
@@ -34,7 +64,7 @@ function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps)
         setCtrl(false);
       }
     });
-  }, []);
+  }, [active]);
 
   const handleClick = (id: number) => {
     const clickedItem = data.find((item) => item.id === id);
@@ -42,6 +72,7 @@ function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps)
     const clickedIndex = data.indexOf(clickedItem);
 
     if (shift) {
+      if (!multiSelect) return;
       if (lastIndex === 0) {
         setLastIndex(clickedIndex);
       }
@@ -54,6 +85,7 @@ function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps)
         setNowSelected(Array.from(new Set([...nowSelected, ...newSelectedItems])));
       }
     } else if (ctrl) {
+      if (!multiSelect) return;
       setLastIndex(clickedIndex);
       if (!nowSelected.includes(clickedItem)) setNowSelected([...nowSelected, clickedItem]);
     } else {
@@ -63,10 +95,10 @@ function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps)
   };
 
   return (
-    <S.SelectorContainer>
-      <S.Title>Title</S.Title>
+    <S.SelectorContainer width={width} height={height}>
+      {showTitle && <S.Title>{isAvailableSelector ? availableTitle : selectedTitle}</S.Title>}
       <S.ItemContainer>
-        {data.map((item) => (
+        {(keyWord ? filter() : data).map((item) => (
           <S.Item
             key={item.id}
             id={String(item.id)}
@@ -78,14 +110,19 @@ function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps)
             active={nowSelected.some((sItem) => sItem.id === item.id)}
             onClick={() => handleClick(item.id)}
             draggable
+            size={itemSize}
           >
             {`${item.emoji} ${item.name}`}
           </S.Item>
         ))}
       </S.ItemContainer>
-      <S.Footer>
-        <div>0/4</div>
-      </S.Footer>
+      {showSelectedItem && (
+        <S.Footer>
+          <div>
+            {active ? nowSelected.length : 0}/{data.length}
+          </div>
+        </S.Footer>
+      )}
     </S.SelectorContainer>
   );
 }

@@ -4,10 +4,10 @@ export const MenuButton = styled.button`
   position: fixed;
   top: 20px;
   right: 20px;
+  padding: 20px;
   font-size: 2rem;
   background: white;
   border-radius: 10px;
-  padding: 20px;
   box-shadow: 0 0 10px rgb(0 0 0 / 20%);
 `;
 

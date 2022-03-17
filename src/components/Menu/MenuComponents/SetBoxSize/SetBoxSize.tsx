@@ -7,7 +7,7 @@ const SetBoxSize = ({ settingState, handleChangeWidth, handleChangeHeight }: Pro
   return (
     <InpDiv>
       <Input placeholder={`가로 (현재: ${width} px)`} onChange={handleChangeWidth} />
-      <Input placeholder={`가로 (현재: ${height} px)`} onChange={handleChangeHeight} />
+      <Input placeholder={`세로 (현재: ${height} px)`} onChange={handleChangeHeight} />
     </InpDiv>
   );
 };

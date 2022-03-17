@@ -10,5 +10,6 @@
       "files": ["**/*.tsx", "**/*.ts"],
       "customSyntax": "@stylelint/postcss-css-in-js"
     }
-  ]
+  ],
+  "rules": { "function-no-unknown": null }
 }
