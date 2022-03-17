@@ -1,5 +1,5 @@
 import React from "react";
-import { ToggleDiv } from "../style";
+import { ToggleDiv } from "../../style";
 import { Props } from "./types";
 
 const ToggleSelectedItem = ({ settingState, handleToggleShowSelectedItem }: Props) => {

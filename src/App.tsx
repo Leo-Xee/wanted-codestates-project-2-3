@@ -11,6 +11,9 @@ const GlobalContainer = styled.div`
   justify-content: center;
   height: 100vh;
   margin: 0 auto;
+
+  user-select: none;
+  -webkit-user-select: none;
 `;
 
 function App() {
