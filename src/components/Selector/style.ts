@@ -2,29 +2,29 @@ import styled from "styled-components";
 
 export const SelectorContainer = styled.div`
   position: relative;
-  width: 300px;
-  height: 600px;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  background: white;
+  width: 300px;
+  height: 600px;
   overflow: hidden;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 20%);
 `;
 
 export const Title = styled.div`
   width: 100%;
   padding: 20px;
   font-size: 2rem;
-  text-align: center;
   font-weight: bold;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border-bottom: 1px solid rgb(0 0 0 / 20%);
 `;
 
 export const ItemContainer = styled.div`
   flex: 1;
-  overflow: auto;
   padding-bottom: 60px;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     display: none;
@@ -32,13 +32,13 @@ export const ItemContainer = styled.div`
 `;
 
 export const Item = styled.div`
-  overflow: hidden;
   padding: 15px;
   padding-left: 20px;
+  overflow: hidden;
   font-size: 1.6rem;
 
   & + & {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgb(0 0 0 / 10%);
   }
 `;
 
@@ -54,6 +54,6 @@ export const Footer = styled.div`
   padding: 15px;
   font-size: 1.4rem;
   color: grey;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
+  border-top: 1px solid rgb(0 0 0 / 10%);
 `;

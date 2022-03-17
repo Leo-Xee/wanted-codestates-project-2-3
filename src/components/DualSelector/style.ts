@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const DualSelectorContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 30px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const InputWithSelectorContainer = styled.div`
