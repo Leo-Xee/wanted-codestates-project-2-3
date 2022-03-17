@@ -8,8 +8,8 @@ export const initialSetting: Setting = {
   multiSelect: false,
   showSelectedItem: true,
   itemSize: "s",
-  width: 170,
-  height: 300,
+  width: 300,
+  height: 600,
 };
 
 export const SettingType = {

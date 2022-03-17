@@ -49,8 +49,10 @@ export const useToggleBtns = (
     const { value } = e.target;
     if (!canChangeNumber(value)) return;
     const width = +value;
-    dispatch({ type: "SET_WIDTH", width });
+    const resizeWidth = width > 600 ? 600 : width < 300 ? 300 : width;
+    dispatch({ type: "SET_WIDTH", width: resizeWidth });
   };
+
   const handleChangeHeight = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (!canChangeNumber(value)) return;

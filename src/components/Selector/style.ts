@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { ItemSize } from "../Menu/settingReducer/types";
 
-export const SelectorContainer = styled.div`
+export const SelectorContainer = styled.div<{ width: number; height: number }>`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 600px;
+  width: ${({ width }) => `${width}px`};
+  height: ${({ height }) => `${height}px`};
   overflow: hidden;
   background: white;
   border-radius: 10px;
@@ -25,12 +26,13 @@ export const ItemContainer = styled.div`
   flex: 1;
   padding-bottom: 60px;
   overflow: auto;
+  background: #f8f8ff;
 
-  & .move_up {
+  & .move-up {
     border-top: 2px solid #fd7e14;
   }
 
-  & .move_down {
+  & .move-down {
     border-bottom: 2px solid #fd7e14;
   }
 
@@ -39,23 +41,19 @@ export const ItemContainer = styled.div`
   }
 `;
 
-export const Item = styled.div<{ active: boolean }>`
-  overflow: hidden;
-  padding: 15px;
-  padding-left: 20px;
-  overflow: hidden;
+export const Item = styled.div<{ active: boolean; itemSize: ItemSize }>`
   padding: 15px 0 15px 20px;
+  overflow: hidden;
   font-size: 1.6rem;
+  font-size: ${({ itemsize }) => (itemsize === "xs" ? "10px" : itemsize === "s" ? "16px" : "22px")};
+  color: ${({ active }) => active && "white"};
   user-select: none;
-  background-color: white;
+  background: ${({ active }) => (active ? "CornflowerBlue" : "white")};
   border-bottom: 1px solid rgb(0 0 0 / 10%);
 
   &:last-child {
     border: none;
   }
-
-  background: ${({ active }) => active && "CornflowerBlue"};
-  color: ${({ active }) => active && "white"}; ;
 `;
 
 export const Footer = styled.div`
