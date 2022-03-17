@@ -41,11 +41,11 @@ export const ItemContainer = styled.div`
   }
 `;
 
-export const Item = styled.div<{ active: boolean; itemSize: ItemSize }>`
+export const Item = styled.div<{ active: boolean; size: ItemSize }>`
   padding: 15px 0 15px 20px;
   overflow: hidden;
   font-size: 1.6rem;
-  font-size: ${({ itemsize }) => (itemsize === "xs" ? "10px" : itemsize === "s" ? "16px" : "22px")};
+  font-size: ${({ size }) => (size === "xs" ? "10px" : size === "s" ? "16px" : "22px")};
   color: ${({ active }) => active && "white"};
   user-select: none;
   background: ${({ active }) => (active ? "CornflowerBlue" : "white")};

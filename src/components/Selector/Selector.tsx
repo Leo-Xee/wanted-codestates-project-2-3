@@ -110,7 +110,7 @@ function Selector({
             active={nowSelected.some((sItem) => sItem.id === item.id)}
             onClick={() => handleClick(item.id)}
             draggable
-            itemSize={itemSize}
+            size={itemSize}
           >
             {`${item.emoji} ${item.name}`}
           </S.Item>
