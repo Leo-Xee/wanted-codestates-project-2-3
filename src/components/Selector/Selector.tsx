@@ -11,9 +11,8 @@ type SelectorProps = {
   setNowSelected: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
 };
 
-function Selector({ data, setData }: SelectorProps) {
+function Selector({ data, setData, nowSelected, setNowSelected }: SelectorProps) {
   const [handleDragStart, handleDragEnter, handleDragLeave, handleDrop] = useDnD(data, setData);
-  const [selectedItems, setSelectedItems] = useState<{ id: number; name: string }[]>([]);
   const [lastIndex, setLastIndex] = useState<number>(0);
 
   const [shift, setShift] = useState(false);
@@ -49,17 +48,17 @@ function Selector({ data, setData }: SelectorProps) {
 
       if (clickedIndex > lastIndex) {
         const newSelectedItems = data.slice(lastIndex, clickedIndex + 1);
-        setSelectedItems(Array.from(new Set([...selectedItems, ...newSelectedItems])));
+        setNowSelected(Array.from(new Set([...nowSelected, ...newSelectedItems])));
       } else {
         const newSelectedItems = data.slice(clickedIndex, lastIndex + 1);
-        setSelectedItems(Array.from(new Set([...selectedItems, ...newSelectedItems])));
+        setNowSelected(Array.from(new Set([...nowSelected, ...newSelectedItems])));
       }
     } else if (ctrl) {
       setLastIndex(clickedIndex);
-      if (!selectedItems.includes(clickedItem)) setSelectedItems([...selectedItems, clickedItem]);
+      if (!nowSelected.includes(clickedItem)) setNowSelected([...nowSelected, clickedItem]);
     } else {
       setLastIndex(clickedIndex);
-      setSelectedItems([clickedItem]);
+      setNowSelected([clickedItem]);
     }
   };
 
@@ -76,7 +75,7 @@ function Selector({ data, setData }: SelectorProps) {
             onDragLeave={handleDragLeave}
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
-            active={selectedItems.some((sItem) => sItem.id === item.id)}
+            active={nowSelected.some((sItem) => sItem.id === item.id)}
             onClick={() => handleClick(item.id)}
             draggable
           >

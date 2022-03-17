@@ -54,7 +54,8 @@ export const Item = styled.div<{ active: boolean }>`
     border-top: 1px solid rgb(0 0 0 / 10%);
   }
 
-  background: ${({ active }) => active && "blue"};
+  background: ${({ active }) => active && "CornflowerBlue"};
+  color: ${({ active }) => active && "white"}; ;
 `;
 
 export const Footer = styled.div`
