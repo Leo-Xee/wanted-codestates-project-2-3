@@ -17,15 +17,14 @@ const data = [
   { id: 13, name: "asdfe" },
 ];
 
-function Selector({ active }: { active: boolean }) {
+function Selector() {
   const [selectedItems, setSelectedItems] = useState<{ id: number; name: string }[]>([]);
+  const [lastIndex, setLastIndex] = useState<number>(0);
 
   const [shift, setShift] = useState(false);
   const [ctrl, setCtrl] = useState(false);
 
   useEffect(() => {
-    if (!active) setSelectedItems([]);
-
     document.addEventListener("keydown", (e) => {
       if (e.shiftKey) {
         setShift(true);
@@ -41,20 +40,31 @@ function Selector({ active }: { active: boolean }) {
         setCtrl(false);
       }
     });
-  }, [active]);
+  }, []);
 
   const handleClick = (id: number) => {
+    const clickedItem = data.find((item) => item.id === id);
+    if (!clickedItem) return;
+    const clickedIndex = data.indexOf(clickedItem);
+
     if (shift) {
-      console.log("shift!");
-    } else if (ctrl) {
-      const clickedItem = data.find((item) => item.id === id);
-      if (clickedItem) {
-        if (!selectedItems.includes(clickedItem)) setSelectedItems([...selectedItems, clickedItem]);
+      if (lastIndex === 0) {
+        setLastIndex(clickedIndex);
       }
-      return false;
+
+      if (clickedIndex > lastIndex) {
+        const newSelectedItems = data.slice(lastIndex, clickedIndex + 1);
+        setSelectedItems(Array.from(new Set([...selectedItems, ...newSelectedItems])));
+      } else {
+        const newSelectedItems = data.slice(clickedIndex, lastIndex + 1);
+        setSelectedItems(Array.from(new Set([...selectedItems, ...newSelectedItems])));
+      }
+    } else if (ctrl) {
+      setLastIndex(clickedIndex);
+      if (!selectedItems.includes(clickedItem)) setSelectedItems([...selectedItems, clickedItem]);
     } else {
-      const clickedItem = data.find((item) => item.id === id);
-      if (clickedItem) setSelectedItems([clickedItem]);
+      setLastIndex(clickedIndex);
+      setSelectedItems([clickedItem]);
     }
   };
 
@@ -62,10 +72,10 @@ function Selector({ active }: { active: boolean }) {
     <S.SelectorContainer>
       <S.Title>Title</S.Title>
       <S.ItemContainer>
-        {data.map((item, idx) => (
+        {data.map((item, index) => (
           <S.Item
             key={item.id}
-            idx={idx}
+            index={index}
             active={selectedItems.some((sItem) => sItem.id === item.id)}
             onClick={() => handleClick(item.id)}
           >

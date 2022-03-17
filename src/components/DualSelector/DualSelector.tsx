@@ -20,7 +20,7 @@ function DualSelector({ settingState }: Props) {
     <S.DualSelectorContainer>
       <S.InputWithSelectorContainer>
         <SearchBar />
-        <Selector nowSelected={nowSelected} setNowSelected={setNowSelected} itemList={avaliable} />
+        <Selector />
       </S.InputWithSelectorContainer>
       <ControlButtons
         nowSelected={nowSelected}
@@ -32,7 +32,7 @@ function DualSelector({ settingState }: Props) {
       />
       <S.InputWithSelectorContainer>
         <SearchBar />
-        <Selector nowSelected={nowSelected} setNowSelected={setNowSelected} itemList={selected} />
+        <Selector />
       </S.InputWithSelectorContainer>
     </S.DualSelectorContainer>
   );

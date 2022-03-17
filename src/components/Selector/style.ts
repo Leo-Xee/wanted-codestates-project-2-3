@@ -31,7 +31,7 @@ export const ItemContainer = styled.div`
   }
 `;
 
-export const Item = styled.div<{ active: boolean; idx: number }>`
+export const Item = styled.div<{ active: boolean; index: number }>`
   overflow: hidden;
   padding: 15px;
   padding-left: 20px;
