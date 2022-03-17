@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const SearchBarBlock = styled.input`
+export const SearchBarBlock = styled.input<{ width: number }>`
   width: 300px;
+  width: ${({ width }) => `${width}px`};
   padding: 15px 20px;
   font-size: 1.8rem;
   color: gray;
