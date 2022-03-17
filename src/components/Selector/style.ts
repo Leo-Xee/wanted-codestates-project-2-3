@@ -37,6 +37,7 @@ export const Item = styled.div`
   overflow: hidden;
   font-size: 1.6rem;
   user-select: none;
+  background-color: white;
 
   & + & {
     border-top: 1px solid rgb(0 0 0 / 10%);
