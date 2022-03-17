@@ -1,17 +1,19 @@
-import React, { useReducer, useState } from "react";
-import * as S from "./style";
-
+import React, { MutableRefObject, useState } from "react";
 import { BiMenu } from "react-icons/bi";
-import { settingReducer, initialSetting } from "./settingReducer";
+
+import * as S from "./style";
 import { useToggleBtns } from "./menuFunc/useToggleBtns";
-import TitleInput from "./TitleInput";
-import ToggleTitle from "./ToggleTitle";
-import ToggleSearch from "./ToggleSearch";
-import ToggleMultiSelect from "./ToggleMultiSelect";
-import ToggleSelectedItem from "./ToggleSelectedItem";
-import SetItemSize from "./SetItemSize";
-import SetBoxSize from "./SetBoxSize";
+import {
+  TitleInput,
+  ToggleTitle,
+  ToggleSearch,
+  ToggleMultiSelect,
+  ToggleSelectedItem,
+  SetItemSize,
+  SetBoxSize,
+} from "./MenuComponents";
 import { Props } from "./types";
+import { useClickAway } from "./menuFunc/useClickAway";
 
 function Menu({ settingState, dispatch }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,13 +34,18 @@ function Menu({ settingState, dispatch }: Props) {
     handleChangeHeight,
   ] = useToggleBtns(settingState, dispatch);
 
+  const awayEvent = () => {
+    menuOpen && setMenuOpen(false);
+  };
+  const ref = useClickAway(awayEvent, [menuOpen]);
+
   return (
     <>
       <S.MenuButton onClick={handleToggleMenu}>
         <BiMenu />
       </S.MenuButton>
       {menuOpen && (
-        <S.MenuContainer>
+        <S.MenuContainer ref={ref as MutableRefObject<HTMLDivElement>}>
           <ToggleTitle settingState={settingState} handleToggleShowTitle={handleToggleShowTitle} />
           <TitleInput
             settingState={settingState}

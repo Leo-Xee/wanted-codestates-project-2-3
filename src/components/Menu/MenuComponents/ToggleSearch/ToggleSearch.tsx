@@ -1,6 +1,6 @@
 import React from "react";
 import { Props } from "./types";
-import { ToggleDiv } from "../style";
+import { ToggleDiv } from "../../style";
 
 const ToggleSearch = ({ settingState, handleToggleShowSearch }: Props) => {
   const { showSearch } = settingState;

@@ -1,5 +1,5 @@
-import { InpDiv, Input } from "../style";
-import React from "./SetBoxSize";
+import React from "react";
+import { InpDiv, Input } from "../../style";
 import { Props } from "./types";
 
 const SetBoxSize = ({ settingState, handleChangeWidth, handleChangeHeight }: Props) => {
