@@ -1,49 +1,41 @@
 import React from "react";
-import * as S from "./style";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import { EmojiMenu } from "../../data/emojiMenus";
+import useDnD from "../../hooks/useDnD";
+import * as S from "./style";
 
-interface SelectorProps {
+type SelectorProps = {
   data: EmojiMenu[];
-  setData: React.Dispatch<React.SetStateAction<EmojiMenu[]>>;
-}
+  setData: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
+  nowSelected: EmojiMenu[];
+  setNowSelected: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
+};
 
 function Selector({ data, setData }: SelectorProps) {
-  const handleOnDragEnd = (result: any) => {
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
-  };
+  const [handleDragStart, handleDragEnter, handleDragLeave, handleDrop] = useDnD(data, setData);
 
   return (
     <S.SelectorContainer>
       <S.Title>Title</S.Title>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="data">
-          {(provided) => (
-            <S.ItemContainer {...provided.droppableProps} ref={provided.innerRef}>
-              {data.map(({ id, emoji, name }, index) => {
-                return (
-                  <Draggable key={id} draggableId={String(id)} index={index}>
-                    {(provided) => (
-                      <S.Item
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >{`${emoji} ${name}`}</S.Item>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </S.ItemContainer>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <S.Footer></S.Footer>
+      <S.ItemContainer>
+        {data.map((item) => (
+          <S.Item
+            key={item.id}
+            id={String(item.id)}
+            onDragStart={handleDragStart}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={handleDrop}
+            draggable
+          >
+            {`${item.emoji} ${item.name}`}
+          </S.Item>
+        ))}
+      </S.ItemContainer>
+      <S.Footer>
+        <div>0/4</div>
+      </S.Footer>
     </S.SelectorContainer>
   );
 }
