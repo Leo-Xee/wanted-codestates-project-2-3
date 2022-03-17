@@ -12,27 +12,37 @@ interface Props {
 }
 
 function DualSelector({ settingState }: Props) {
-  const [avaliable, setAvaliable] = useState<EmojiMenu[]>(emojiMenus); // 왼쪽 셀렉터 데이터 ( Available )
-  const [selected, setSelected] = useState<EmojiMenu[]>([]); // 오른쪽 셀렉터 데이터 ( Selected )
+  const [avaliableData, setAvaliableData] = useState<EmojiMenu[]>(emojiMenus); // 왼쪽 셀렉터 데이터 ( Available )
+  const [selectedData, setSelectedData] = useState<EmojiMenu[]>([]); // 오른쪽 셀렉터 데이터 ( Selected )
   const [nowSelected, setNowSelected] = useState<EmojiMenu[]>([]); // 현재 선택되어있는 아이템
 
   return (
     <S.DualSelectorContainer>
       <S.InputWithSelectorContainer>
         <SearchBar />
-        <Selector />
+        <Selector
+          data={avaliableData}
+          setData={setAvaliableData}
+          nowSelected={nowSelected}
+          setNowSelected={setNowSelected}
+        />
       </S.InputWithSelectorContainer>
       <ControlButtons
         nowSelected={nowSelected}
         setNowSelected={setNowSelected}
-        selected={selected}
-        setSelected={setSelected}
-        avaliable={avaliable}
-        setAvaliable={setAvaliable}
+        selectedData={selectedData}
+        setSelectedData={setSelectedData}
+        avaliableData={avaliableData}
+        setAvaliableData={setAvaliableData}
       />
       <S.InputWithSelectorContainer>
         <SearchBar />
-        <Selector />
+        <Selector
+          data={selectedData}
+          setData={setSelectedData}
+          nowSelected={nowSelected}
+          setNowSelected={setNowSelected}
+        />
       </S.InputWithSelectorContainer>
     </S.DualSelectorContainer>
   );

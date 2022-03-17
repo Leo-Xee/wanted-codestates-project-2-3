@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import { EmojiMenu } from "../../data/emojiMenus";
+import useDnD from "../../hooks/useDnD";
 import * as S from "./style";
 
-const data = [
-  { id: 1, name: "sdfe" },
-  { id: 2, name: "sdsfe" },
-  { id: 3, name: "sdcfe" },
-  { id: 4, name: "sfdfe" },
-  { id: 5, name: "sdxfe" },
-  { id: 6, name: "sqdfe" },
-  { id: 7, name: "sdzfe" },
-  { id: 8, name: "sbdfe" },
-  { id: 9, name: "csdfe" },
-  { id: 10, name: "x sdfe" },
-  { id: 11, name: "sfaddfe" },
-  { id: 12, name: "asdfe" },
-  { id: 13, name: "asdfe" },
-];
+type SelectorProps = {
+  data: EmojiMenu[];
+  setData: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
+  nowSelected: EmojiMenu[];
+  setNowSelected: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>;
+};
 
-function Selector() {
+function Selector({ data, setData }: SelectorProps) {
+  const [handleDragStart, handleDragEnter, handleDragLeave, handleDrop] = useDnD(data, setData);
   const [selectedItems, setSelectedItems] = useState<{ id: number; name: string }[]>([]);
   const [lastIndex, setLastIndex] = useState<number>(0);
 
@@ -72,14 +67,20 @@ function Selector() {
     <S.SelectorContainer>
       <S.Title>Title</S.Title>
       <S.ItemContainer>
-        {data.map((item, index) => (
+        {data.map((item) => (
           <S.Item
             key={item.id}
-            index={index}
+            id={String(item.id)}
+            onDragStart={handleDragStart}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={handleDrop}
             active={selectedItems.some((sItem) => sItem.id === item.id)}
             onClick={() => handleClick(item.id)}
+            draggable
           >
-            {item.name}
+            {`${item.emoji} ${item.name}`}
           </S.Item>
         ))}
       </S.ItemContainer>

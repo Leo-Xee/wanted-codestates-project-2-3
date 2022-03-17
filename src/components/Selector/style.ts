@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const SelectorContainer = styled.div`
   position: relative;
@@ -26,18 +26,29 @@ export const ItemContainer = styled.div`
   padding-bottom: 60px;
   overflow: auto;
 
+  & .move {
+    /* background-color: gray; */
+    /* border-bottom: 1px solid red; */
+  }
+
+  & .disapper {
+    display: none;
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
-export const Item = styled.div<{ active: boolean; index: number }>`
+export const Item = styled.div<{ active: boolean }>`
   overflow: hidden;
   padding: 15px;
   padding-left: 20px;
   overflow: hidden;
+  padding: 15px 0 15px 20px;
   font-size: 1.6rem;
   user-select: none;
+  background-color: white;
 
   & + & {
     border-top: 1px solid rgb(0 0 0 / 10%);
