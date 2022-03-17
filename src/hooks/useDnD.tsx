@@ -10,15 +10,11 @@ function useDnD(
   const startClientY = useRef<number>();
   const enterClientY = useRef<number>();
 
-  // move_up= start의 ClientY > enter의 ClientY
-  // move_down = start의 ClientY < enter의 ClientY
   const checkMoveUpAndDown = (): string => {
     if (startClientY.current && enterClientY.current) {
       if (startClientY.current > enterClientY.current) {
-        // console.log("Up");
         return "move_up";
       } else if (startClientY.current < enterClientY.current) {
-        // console.log("Down");
         return "move_down";
       }
     }
@@ -36,7 +32,6 @@ function useDnD(
     const target = e.target as HTMLElement;
     lastLeaveTarget.current = target;
     enterClientY.current = e.clientY;
-    console.log("enter", target.textContent);
     target.classList.add(checkMoveUpAndDown());
   };
 
@@ -51,8 +46,6 @@ function useDnD(
     const target = e.target as HTMLElement;
     const draggedId = Number(e.dataTransfer.getData("text/plain"));
     const targetId = Number(target.id);
-
-    console.log("Drop", target.textContent);
 
     if (lastLeaveTarget.current) {
       lastLeaveTarget.current.classList.remove("move_up");
