@@ -11,10 +11,10 @@ import ToggleMultiSelect from "./ToggleMultiSelect";
 import ToggleSelectedItem from "./ToggleSelectedItem";
 import SetItemSize from "./SetItemSize";
 import SetBoxSize from "./SetBoxSize";
+import { Props } from "./types";
 
-function Menu() {
+function Menu({ settingState, dispatch }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [settingState, dispatch] = useReducer(settingReducer, initialSetting);
 
   const handleToggleMenu = () => {
     setMenuOpen((prev) => !prev);
