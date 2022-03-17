@@ -31,15 +31,18 @@ export const ItemContainer = styled.div`
   }
 `;
 
-export const Item = styled.div`
+export const Item = styled.div<{ active: boolean; idx: number }>`
   overflow: hidden;
   padding: 15px;
   padding-left: 20px;
   font-size: 1.6rem;
+  user-select: none;
 
   & + & {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
+
+  background: ${({ active }) => active && "blue"};
 `;
 
 export const Footer = styled.div`
