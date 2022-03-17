@@ -10,8 +10,6 @@ function DualSelector() {
   const [menus, setMenus] = useState<EmojiMenu[] | []>(emojiMenus);
   const [selectedMenus, setSelectedMenus] = useState<EmojiMenu[] | []>([]);
 
-  console.log(menus);
-
   return (
     <S.DualSelectorContainer>
       <S.InputWithSelectorContainer>

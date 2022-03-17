@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const SelectorContainer = styled.div`
   position: relative;
@@ -26,6 +26,15 @@ export const ItemContainer = styled.div`
   overflow: auto;
   padding-bottom: 60px;
 
+  & .move {
+    /* background-color: gray; */
+    /* border-bottom: 1px solid red; */
+  }
+
+  & .disapper {
+    display: none;
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -33,8 +42,7 @@ export const ItemContainer = styled.div`
 
 export const Item = styled.div`
   overflow: hidden;
-  padding: 15px;
-  padding-left: 20px;
+  padding: 15px 0 15px 20px;
   font-size: 1.6rem;
 
   & + & {
