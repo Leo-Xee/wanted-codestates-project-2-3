@@ -17,4 +17,8 @@ export const IconButton = styled.button`
   & + & {
     border-top: 1px solid rgb(0 0 0 / 10%);
   }
+
+  &:active {
+    background: #f7f7f7;
+  }
 `;
