@@ -7,23 +7,39 @@ function useDnD(
   setData: React.Dispatch<React.SetStateAction<EmojiMenu[] | []>>,
 ) {
   const lastLeaveTarget = useRef<HTMLElement>();
+  const startClientY = useRef<number>();
+  const enterClientY = useRef<number>();
+
+  const checkMoveUpAndDown = (): string => {
+    if (startClientY.current && enterClientY.current) {
+      if (startClientY.current > enterClientY.current) {
+        return "move_up";
+      } else if (startClientY.current < enterClientY.current) {
+        return "move_down";
+      }
+    }
+    return "";
+  };
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/plain", String(target.id));
-    // console.log(e);
+    startClientY.current = e.clientY;
   };
 
   const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-    // target.classList.add("move");
     lastLeaveTarget.current = target;
+    enterClientY.current = e.clientY;
+    target.classList.add(checkMoveUpAndDown());
   };
 
   const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-    // target.classList.remove("move");
+
+    target.classList.remove("move_up");
+    target.classList.remove("move_down");
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -31,9 +47,10 @@ function useDnD(
     const draggedId = Number(e.dataTransfer.getData("text/plain"));
     const targetId = Number(target.id);
 
-    // if (lastLeaveTarget.current) {
-    //   lastLeaveTarget.current.classList.remove("move");
-    // }
+    if (lastLeaveTarget.current) {
+      lastLeaveTarget.current.classList.remove("move_up");
+      lastLeaveTarget.current.classList.remove("move_down");
+    }
     changeDataOrder(draggedId, targetId);
   };
 
