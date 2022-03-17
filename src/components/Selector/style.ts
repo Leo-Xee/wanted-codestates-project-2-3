@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const SelectorContainer = styled.div`
   position: relative;
@@ -26,13 +26,12 @@ export const ItemContainer = styled.div`
   padding-bottom: 60px;
   overflow: auto;
 
-  & .move {
-    /* background-color: gray; */
-    /* border-bottom: 1px solid red; */
+  & .move_up {
+    border-top: 2px solid #fd7e14;
   }
 
-  & .disapper {
-    display: none;
+  & .move_down {
+    border-bottom: 2px solid #fd7e14;
   }
 
   &::-webkit-scrollbar {
@@ -46,9 +45,10 @@ export const Item = styled.div`
   font-size: 1.6rem;
   user-select: none;
   background-color: white;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
 
-  & + & {
-    border-top: 1px solid rgb(0 0 0 / 10%);
+  &:last-child {
+    border: none;
   }
 `;
 
