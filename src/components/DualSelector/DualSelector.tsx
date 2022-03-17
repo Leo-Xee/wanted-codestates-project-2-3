@@ -4,7 +4,6 @@ import * as S from "./style";
 import SearchBar from "../SearchBar";
 import Selector from "../Selector";
 import ControlButtons from "../ControlButtons";
-
 import { Setting } from "../Menu/settingReducer/types";
 import { emojiMenus, EmojiMenu } from "../../data/emojiMenus";
 
