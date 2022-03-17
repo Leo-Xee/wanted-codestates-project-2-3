@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { MutableRefObject, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 
 import * as S from "./style";
@@ -13,6 +13,7 @@ import {
   SetBoxSize,
 } from "./MenuComponents";
 import { Props } from "./types";
+import { useClickAway } from "./menuFunc/useClickAway";
 
 function Menu({ settingState, dispatch }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,13 +34,18 @@ function Menu({ settingState, dispatch }: Props) {
     handleChangeHeight,
   ] = useToggleBtns(settingState, dispatch);
 
+  const awayEvent = () => {
+    menuOpen && setMenuOpen(false);
+  };
+  const ref = useClickAway(awayEvent, [menuOpen]);
+
   return (
     <>
       <S.MenuButton onClick={handleToggleMenu}>
         <BiMenu />
       </S.MenuButton>
       {menuOpen && (
-        <S.MenuContainer>
+        <S.MenuContainer ref={ref as MutableRefObject<HTMLDivElement>}>
           <ToggleTitle settingState={settingState} handleToggleShowTitle={handleToggleShowTitle} />
           <TitleInput
             settingState={settingState}
