@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import DualSelector from "./components/DualSelector";
 import Menu from "./components/Menu";
+import { initialSetting, settingReducer } from "./components/Menu/settingReducer";
 
 const GlobalContainer = styled.div`
   display: flex;
@@ -13,10 +14,11 @@ const GlobalContainer = styled.div`
 `;
 
 function App() {
+  const [settingState, dispatch] = useReducer(settingReducer, initialSetting);
   return (
     <GlobalContainer>
-      <DualSelector />
-      <Menu />
+      <DualSelector settingState={settingState} />
+      <Menu settingState={settingState} dispatch={dispatch} />
     </GlobalContainer>
   );
 }
