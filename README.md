@@ -16,9 +16,44 @@
 ## 기능 구현
 
 
-### 기능
+### 기능: 컴포넌트 이동 버튼
 
-내용
+5가지의 버튼이 어느 쪽의 컴포넌트를 반대쪽으로 이동해 주어야한다는 공통적인 기능이 있기 때문에 최대한 코드 중복을 줄이는 것에 집중했습니다.
+
+moveMoment()라는 메소드를 만들고 인자로 `movekey`를 전달받고 switch 을 통해 5가지의 기능을 분기 처리해주었습니다.
+
+컴포넌트를 전달하는 쪽에서는 filtered 메소드를 통해 선택되지 않은 컴포넌트만 남도록 하였고,
+
+컴포넌트를 전달받는 쪽에서는 (...)Spread Operation을 사용하여 기존 컴포넌트와 합쳐주었습니다.
+
+```
+const moveMoment = (type: string) => {
+    switch (type) {
+      case "reset":
+        setAvaliableData(emojiMenus);
+        setSelectedData([]);
+        return;
+      case "SToA_all":
+        setAvaliableData(emojiMenus);
+        setSelectedData([]);
+        return;
+      case "AToS_all":
+        setAvaliableData([]);
+        setSelectedData(emojiMenus);
+        return;
+      case "SToA_selected":
+        setAvaliableData([...avaliableData, ...nowSelected]);
+        setSelectedData(filteredItems(selectedData));
+        return;
+      case "AToS_selected":
+        setAvaliableData(filteredItems(avaliableData));
+        setSelectedData([...selectedData, ...nowSelected]);
+        return;
+      default:
+        alert("유효하지 않은 작업입니다.");
+    }
+  };
+```
 
 ### 기능
 
