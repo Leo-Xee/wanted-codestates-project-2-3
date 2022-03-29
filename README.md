@@ -26,7 +26,7 @@ moveMoment()라는 메소드를 만들고 인자로 `movekey`를 전달받고 sw
 
 컴포넌트를 전달받는 쪽에서는 (...)Spread Operation을 사용하여 기존 컴포넌트와 합쳐주었습니다.
 
-```
+```js
 const moveMoment = (type: string) => {
     switch (type) {
       case "reset":
