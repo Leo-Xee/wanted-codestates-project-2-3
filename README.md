@@ -11,8 +11,6 @@
   <img src="https://img.shields.io/badge/react--icons-brightgreen?style=for-the-badge" />
 </p>
 
-## 요구 사항
-
 ## 기능 구현
 
 
@@ -55,12 +53,6 @@ const moveMoment = (type: string) => {
   };
 ```
 
-### 기능
-
-내용
-
----
-
 ### 기능: Menu Component(setting)
 #### husky, style-lint적용 이유
 
@@ -99,13 +91,6 @@ setting에는 타이틀, 제목, 검색, multiSelect, 갯수표시여부, 아이
 
 따라서 tsx에는 마크업만 들어갈 수 있도록 노력하였고, 로직은 훅으로 분리하였습니다.
 
-내용
-
-### 기능
-
-내용
-
----
 
 ## 팀원 소개
 
